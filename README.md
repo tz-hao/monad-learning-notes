@@ -66,6 +66,7 @@ Tech
 - [AI 协作记录](./ai-collaboration-record.md)
 - [Week 3 团队角色说明](./week3-role.md)
 - [开源项目阅读记录](./open-source-reading.md)
+- [最小 Web3 / AI 原型定义](./prototype-definition.md)
 
 后续计划：
 
