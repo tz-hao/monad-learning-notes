@@ -65,6 +65,7 @@ Tech
 - [Week 2 学习记录](./week2-learning-log.md)
 - [AI 协作记录](./ai-collaboration-record.md)
 - [Week 3 团队角色说明](./week3-role.md)
+- [开源项目阅读记录](./open-source-reading.md)
 
 后续计划：
 
