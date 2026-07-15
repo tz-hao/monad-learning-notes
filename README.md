@@ -63,6 +63,7 @@ Tech
 
 - [Week 2 主方向选择：Dev](./week2-direction.md)
 - [Week 2 学习记录](./week2-learning-log.md)
+- [AI 协作记录](./ai-collaboration-record.md)
 
 后续计划：
 
