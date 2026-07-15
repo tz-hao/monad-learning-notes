@@ -59,6 +59,10 @@ Week 2 主方向：
 Tech
 ```
 
+方向说明：
+
+- [Week 2 主方向选择：Dev](./week2-direction.md)
+
 后续计划：
 
 - 搭建 Foundry 或 Hardhat 项目
