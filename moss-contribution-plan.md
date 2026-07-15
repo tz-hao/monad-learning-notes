@@ -1,59 +1,68 @@
-# Moss 开源贡献计划
+# Moss 开源贡献计划：永续合约语义研究
 
 **Builder 身份：** Research Builder  
-**周期：** 2026-07-15 ～ 2026-07-21  
-**项目：** [nishuzumi/moss](https://github.com/nishuzumi/moss)
+**目标 Issue：** [#15 Design: perpetuals need verbs and a category](https://github.com/nishuzumi/moss/issues/15)
+**周期：** 2026-07-15 ～ 2026-07-21
 
 ## 选择的贡献方向
 
-我选择 **Research Builder**。本周先围绕 Moss 的架构、Agent Workflow 与安全边界输出一篇可供新贡献者使用的中文技术笔记，并将其中可直接进入项目的改进点整理为 Documentation 建议。
+我选择参与 Issue #15：为 Monad 上永续合约（Perps）设计适合 Moss 的用户动作词、协议分类、风险标签与可验证效果模型。这是一个已有的开放设计议题，不与 #16 的新手文档/FAQ 改进重复。
 
-## 为什么选择这个方向
+## 为什么选择它
 
-我已经完成 Moss 的基础调研，能够用中文解释它为何以 `discover → load → action → simulate` 组织 Agent 的链上操作。相比立刻编写协议 adapter，这条路径更适合当前阶段：
+Moss 的核心是把用户意图映射为安全、可模拟的能力。现有动词集覆盖兑换、借贷、质押等操作，但无法表达开仓、平仓和保证金管理；而永续合约的“仓位”也不等同于普通代币流。
 
-- Moss 仍处于 Alpha，先准确理解 Plan、`expects`、模拟和 warning 的边界更重要。
-- 项目已经提供英文 Getting Started、MCP 工具与 Agent Skill 文档，但新中文读者仍需要一份以“Agent 为什么必须模拟并停在 warning 前”为主线的导读。
-- 先输出可验证的文档和术语对照，可以降低后续参与 adapter、Demo 或 PR 的理解成本。
+这更适合 Research Builder：先厘清语义、风险与验证边界，为后续 adapter 开发提供明确约束，而不是在规则未定义时直接写代码。
 
-## 准备完成的任务
+## 本周准备完成的任务
 
-### 必做
+1. 阅读 Moss 的 `discover` 词汇设计、`expects` 对账模型、observations 以及 Agent halt rule。
+2. 调研 Monad 上至少一个永续协议的公开交互模型，区分开仓、平仓、加/减保证金、清算与资金费。
+3. 比较两套动词设计：
+   - `open` / `close` + `long` / `short` 参数；
+   - 以 `supply` / `withdraw` 表示保证金操作，并单独定义仓位动作。
+4. 提出分类建议：新增闭集分类 `perps`，或保留 `dex` 并使用 `perps` tag；说明取舍。
+5. 为每种动作写出可机械验证的 `expects` 与只能由 observation 叙述的结果。
+6. 在 #15 提交一条结构化评论，供维护者讨论；未经确认不修改 ADR 或核心代码。
 
-1. 阅读 `@themoss/core`、`@themoss/simulator`、`@themoss/mcp-server` 三层职责，以及一个协议 adapter（WMON 或 Kuru）。
-2. 画出 Agent 的标准调用链：用户意图 → `discover` → `load` → `action` → `simulate` → 人工确认/钱包签名。
-3. 输出中文技术笔记《Moss Agent Workflow 与安全边界》：解释 Plan、`expects`、effects reconciliation、intent alignment、warning halt rule。
-4. 整理至少 5 个新贡献者常见问题，例如“零 warning 是否等于可以无条件签名？”、“为什么不能从网页记忆 token 地址？”、“多步骤 Plan 如何模拟？”。
-5. 将可以被上游采用的文档改进建议整理成一个 GitHub Issue；若维护者确认范围合适，再提交文档 PR。
+## 预期交付
 
-### 验收标准
+- 一份 1～2 页的设计笔记：动词、分类、参数、风险标签与安全边界。
+- 一张“用户意图 → Plan 预期 → 模拟效果 → Agent 检查”的映射表。
+- Issue #15 下的讨论评论，明确待维护者决策的问题。
 
-- 技术笔记包含一个 `claim → swap → supply` 的多步骤示例，并清楚标注模拟与签名的边界。
-- 每个安全结论都能回链到 Moss 的官方 README、MCP Tools 或 Agent Skill Guide。
-- Issue 或 PR 只包含可复现、范围明确的文档建议，不修改核心交易逻辑。
+## 初步设计假设
 
-## 本周计划
+| 用户动作 | 建议能力 | 可对账的效果 | 需 observation 补充的效果 |
+| --- | --- | --- | --- |
+| 开多/开空 | `open`，参数含方向与保证金 | 保证金流出、授权、接收方 | 仓位方向、名义价值、杠杆、开仓价 |
+| 平仓 | `close` | 返还或扣除的资产流 | 已平仓数量、已实现盈亏 |
+| 增加保证金 | `supply` 或 `marginAdd` | 资产流出 | 仓位健康度变化 |
+| 提取保证金 | `withdraw` 或 `marginRemove` | 资产流入 | 可提额度、清算风险 |
 
-| 时间 | 计划 | 产出 |
+无论采用哪一种命名，`leverage` 与 `liquidation` 都应作为明确风险标签；模拟出现未声明资金流、授权异常或回滚时，仍必须停止。
+
+## 本周节奏
+
+| 时间 | 工作 | 产出 |
 | --- | --- | --- |
-| Day 1 | 阅读 README、Getting Started、Agent Skill；建立核心术语表。 | 架构与术语笔记 |
-| Day 2 | 阅读 `core`、`simulator`、`mcp-server` 的职责与 Plan 结构。 | 分层架构图与 Plan 字段说明 |
-| Day 3 | 跟随官方示例梳理 `discover → load → action → simulate`。 | Agent Workflow 图与单步骤案例 |
-| Day 4 | 研究多步骤模拟和 warning 规则，整理失败/停止条件。 | 安全边界与 FAQ 草稿 |
-| Day 5 | 完成中文技术笔记，检查术语、链接与事实准确性。 | 可公开的 Markdown 文档 |
-| Day 6 | 将可上游化的改进点写成 Issue；若适合，准备最小文档 PR。 | 1 个 Issue 或 1 个文档 PR 草稿 |
-| Day 7 | 回顾维护者反馈，补充待办与下一周 Dev Builder 路线。 | 周复盘与后续贡献清单 |
+| Day 1 | 阅读 Issue #15 与相关 ADR、Agent Workflow。 | 术语与问题清单 |
+| Day 2 | 调研一个 Monad 永续协议的用户动作和链上结果。 | 协议交互摘要 |
+| Day 3 | 设计动词、分类与参数候选方案。 | 方案对比表 |
+| Day 4 | 建立 `expects` / observation / risk labels 映射。 | 验证边界草图 |
+| Day 5 | 完成设计笔记并自查是否符合 halt rule。 | 评论草稿 |
+| Day 6 | 在 #15 发表结构化讨论评论。 | 上游讨论记录 |
+| Day 7 | 根据反馈修订，并决定下周是否进入 adapter 实现。 | 周复盘 |
 
 ## 贡献边界
 
-- 不跳过 `simulate`，不将模拟结果表述为执行保证。
-- 不处理私钥、不代替用户签名，也不提交未经验证的交易示例。
-- 第一周只做研究和文档产出；新的协议 adapter 或核心逻辑改动留到充分理解项目约束之后。
+- 不在本周实现或提交永续协议 adapter；先等待词汇与验证边界达成共识。
+- 不把模拟结果当作交易结果保证；不处理私钥、不签名、不广播交易。
+- 所有设计必须兼容 Moss 的“warning 即停止”和“Agent 仍需对齐用户意图”规则。
 
-## 参考资料
+## 参考
 
+- [Issue #15](https://github.com/nishuzumi/moss/issues/15)
 - [Moss README](https://github.com/nishuzumi/moss)
-- [Getting Started](https://github.com/nishuzumi/moss/blob/main/docs/getting-started.md)
 - [MCP Tools Reference](https://github.com/nishuzumi/moss/blob/main/docs/mcp-tools.md)
 - [Agent Skill Guide](https://github.com/nishuzumi/moss/blob/main/docs/agent-skill.md)
-- [Protocol Onboarding Guide](https://github.com/nishuzumi/moss/blob/main/docs/protocol-onboarding.md)
