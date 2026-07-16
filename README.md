@@ -68,6 +68,7 @@ Tech
 - [开源项目阅读记录](./open-source-reading.md)
 - [最小 Web3 / AI 原型定义](./prototype-definition.md)
 - [核心文档理解与最小技术骨架](./doc-ai-skeleton.md)
+- [IntentGuard Demo 最小 README](./intentguard-demo-readme.md)
 
 后续计划：
 
