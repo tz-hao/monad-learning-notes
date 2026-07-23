@@ -71,6 +71,8 @@ Tech
 - [核心文档理解与最小技术骨架](./doc-ai-skeleton.md)
 - [IntentGuard Demo 最小 README](./intentguard-demo-readme.md)
 - [Dev Summary：最终汇总](./dev-summary.md)
+- [新人线上活动设计：AI Agent 上链，权限边界怎么设？](./community-event-design.md)
+- [Problem & Mini Demo Card：IntentGuard Agent Wallet](./problem-mini-demo-card.md)
 
 后续计划：
 
