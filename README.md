@@ -77,6 +77,7 @@ Tech
 - [团队脑暴会议记录：Week Mini Demo 方向选择](./team-brainstorm-meeting.md)
 - [团队本周计划：IntentGuard Agent Wallet](./team-week-plan.md)
 - [团队决策与 AI 协作记录](./team-decision-ai-log.md)
+- [外部同学体验与反馈记录](./external-feedback-record.md)
 
 后续计划：
 
