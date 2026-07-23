@@ -73,6 +73,7 @@ Tech
 - [Dev Summary：最终汇总](./dev-summary.md)
 - [新人线上活动设计：AI Agent 上链，权限边界怎么设？](./community-event-design.md)
 - [Problem & Mini Demo Card：IntentGuard Agent Wallet](./problem-mini-demo-card.md)
+- [Dev Builder：核心功能可完成性确认](./dev-feasibility-check.md)
 
 后续计划：
 
