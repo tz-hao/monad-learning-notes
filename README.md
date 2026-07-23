@@ -76,6 +76,7 @@ Tech
 - [Dev Builder：核心功能可完成性确认](./dev-feasibility-check.md)
 - [团队脑暴会议记录：Week Mini Demo 方向选择](./team-brainstorm-meeting.md)
 - [团队本周计划：IntentGuard Agent Wallet](./team-week-plan.md)
+- [团队决策与 AI 协作记录](./team-decision-ai-log.md)
 
 后续计划：
 
