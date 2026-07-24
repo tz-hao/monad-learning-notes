@@ -80,6 +80,7 @@ Tech
 - [外部同学体验与反馈记录](./external-feedback-record.md)
 - [用户测试准备包：IntentGuard Agent Wallet](./user-test-intro-pack.md)
 - [项目研究简报：IntentGuard Agent Wallet](./project-research-brief.md)
+- [Week 4 计划与个人协作复盘](./week4-plan-and-retro.md)
 
 后续计划：
 
