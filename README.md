@@ -79,6 +79,7 @@ Tech
 - [团队决策与 AI 协作记录](./team-decision-ai-log.md)
 - [外部同学体验与反馈记录](./external-feedback-record.md)
 - [用户测试准备包：IntentGuard Agent Wallet](./user-test-intro-pack.md)
+- [项目研究简报：IntentGuard Agent Wallet](./project-research-brief.md)
 
 后续计划：
 
